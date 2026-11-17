@@ -174,5 +174,31 @@
         <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+  <script>
+  window.dataLayer = window.dataLayer || [];
+  (function () {
+    var ok = document.getElementById('submitSuccessMessage');
+    if (!ok) return;
+
+    function isVisible() {
+      return !ok.classList.contains('d-none') &&
+             window.getComputedStyle(ok).display !== 'none';
+    }
+
+    var wasVisible = isVisible();
+
+    new MutationObserver(function () {
+      var nowVisible = isVisible();
+      if (nowVisible && !wasVisible) {
+        window.dataLayer.push({
+          event: 'generate_lead',
+          form_id: 'contact',
+          form_name: 'Contact form'
+        });
+      }
+      wasVisible = nowVisible;
+    }).observe(ok, { attributes: true, attributeFilter: ['class', 'style'] });
+  })();
+</script>
     </body>
 </html>
